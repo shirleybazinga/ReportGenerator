@@ -1,0 +1,4 @@
+﻿tradeRef,productId,productName,productType,brokerId,brokerName,tradeDate,qty,buySell,price
+T-FWD-592,866134565,Product-Name-364,Fx Forward,0,Broker-A,20210708,528866262,S,0.972599744917864
+T-FWD-503,370693295,Product-Name-306,Fx Forward,0,Broker-A,20210708,348074830,S,0.766743339406505
+T-FWD-194,467947495,Product-Name-964,Fx Forward,0,Broker-A,20210708,659540253,S,0.461580730383887

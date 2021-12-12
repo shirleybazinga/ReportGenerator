@@ -1,0 +1,3 @@
+﻿tradeRef,productId,productName,productType,brokerId,brokerName,tradeDate,qty,buySell,price
+T-OTH-360,657324747,Product-Name-392,Others,0,Broker-A,20210713,485503739,B,0.0635254274564323
+T-OTH-731,386600188,Product-Name-770,Others,0,Broker-A,20210713,527922449,B,0.930495743023368

@@ -1,0 +1,3 @@
+﻿tradeRef	productId	productName	productType	brokerId	brokerName	tradeDate	qty	buySell	price
+T-IRS-475	775765583	Product-Name-792	Interest Rate Swap	0	Broker-A	20210714	621320403	S	0.901992432064485
+T-IRS-209	584883729	Product-Name-360	Interest Rate Swap	0	Broker-A	20210714	23455844	S	0.524017607989279
