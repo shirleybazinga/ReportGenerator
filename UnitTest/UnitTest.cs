@@ -86,6 +86,21 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void TestBondFutureC()
+        {
+            var opts = new Options
+            {
+                Product = "Bond Future",
+                Broker = "Broker-C",
+                Date = DateTime.Parse("20 Jul 2021"),
+                Verbose = true,
+                UnitTest = true,
+                OutputPath = Path.Combine(destDir, "bf-c-20210720.csv"),
+            };
+            TestRunOptions(opts);
+        }
+
+        [TestMethod]
         public void TestInterestRateSwapA()
         {
             var opts = new Options
@@ -107,7 +122,7 @@ namespace UnitTest
             {
                 Product = "Interest Rate Swap",
                 Broker = "Broker-B",
-                Date = DateTime.Parse("17 Jul 2021"),
+                Date = DateTime.Parse("15 Jul 2021"),
                 Verbose = true,
                 UnitTest = true,
                 OutputPath = Path.Combine(destDir, "irs-b-20210715.csv"),
@@ -166,7 +181,7 @@ namespace UnitTest
         {
             var srcString = File.ReadAllText(src);
             var destString = File.ReadAllText(dest);
-            string.Equals(srcString, destString);
+            Assert.AreEqual(srcString, destString);
         }
     }
 }

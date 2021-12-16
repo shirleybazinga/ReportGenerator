@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,28 @@ namespace ReportGenerator
 {
     internal class BondFutureReportGenerator : ReportGenerator
     {
-        const string SKIP_BROKER = "Broker-A"; // TODO: config
+        // TODO: config
+        const string BROKER_A = "Broker-A";
+        const string BROKER_C = "Broker-C";
+
+        static readonly Dictionary<string, Action<ClassMap<Trade>>> BrokerColMap = new Dictionary<string, Action<ClassMap<Trade>>>
+        {
+            { BROKER_A, (ClassMap<Trade> classMap) =>
+                {
+                    classMap.AutoMap(CultureInfo.InvariantCulture);
+                    classMap.Map(m => m.Broker.Id).Ignore();
+                    classMap.Map(m => m.Broker.Name).Ignore();
+                    classMap.Map(m => m.Product.Type).Ignore();
+                }
+            },
+            { BROKER_C, (ClassMap<Trade> classMap) =>
+                {
+                    classMap.Map(m => m.Ref).Name("tradeRef");
+                    classMap.Map(m => m.Product.Id).Name("productId");
+                    classMap.Map(m => m.Product.Name).Name("productName");
+                }
+            },
+        };
 
         public BondFutureReportGenerator(string broker) : base(broker)
         {
@@ -25,9 +47,10 @@ namespace ReportGenerator
             using (var writer = new StreamWriter(path))
             using (var csv = GetCsvWriter(writer))
             {
-                if (string.Compare(Broker, SKIP_BROKER, true) == 0)
+                if (BrokerColMap.ContainsKey(Broker))
                 {
-                    csv.Context.RegisterClassMap<TradeMap>();
+                    //csv.Context.RegisterClassMap<TradeMap>();
+                    csv.Context.RegisterClassMap(new TradeMap(BrokerColMap[Broker]));
                 }
                 csv.WriteRecords(records);
             }
@@ -35,12 +58,9 @@ namespace ReportGenerator
 
         public sealed class TradeMap : ClassMap<Trade>
         {
-            public TradeMap()
+            public TradeMap(Action<ClassMap<Trade>> action)
             {
-                AutoMap(CultureInfo.InvariantCulture);
-                Map(m => m.Broker.Id).Ignore();
-                Map(m => m.Broker.Name).Ignore();
-                Map(m => m.Product.Type).Ignore();
+                action?.Invoke(this);
             }
         }
     }

@@ -2,7 +2,7 @@
   "profiles": {
     "ReportGenerator": {
       "commandName": "Project",
-      "commandLineArgs": "-p FxForward -b Broker-A -d \"8 Jul 2021\" -v -o \"..\\..\\..\\..\\test.csv\""
+      "commandLineArgs": "-p BondFuture -b Broker-C -d \"20 Jul 2021\" -v -o \"..\\..\\..\\..\\test.csv\""
     }
   }
 }
